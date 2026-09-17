@@ -1,0 +1,73 @@
+---
+- name: Deploy Warpnet
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create warpnet user
+      ansible.builtin.user:
+        name: warpnet
+        shell: /bin/bash
+        create_home: true
+
+    - name: Install required packages
+      ansible.builtin.dnf:
+        name:
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Create application directory
+      ansible.builtin.file:
+        path: /opt/warpnet
+        state: directory
+        owner: warpnet
+        group: warpnet
+        mode: "0755"
+
+    - name: Copy requirements
+      ansible.builtin.copy:
+        src: ../requirements.txt
+        dest: /opt/warpnet/requirements.txt
+        owner: warpnet
+        group: warpnet
+        mode: "0644"
+
+    - name: Install Python dependencies
+      ansible.builtin.pip:
+        requirements: /opt/warpnet/requirements.txt
+        virtualenv: /opt/warpnet/.venv
+        virtualenv_command: python3 -m venv
+      become_user: warpnet
+
+    - name: Copy application
+      ansible.builtin.copy:
+        src: ../application.py
+        dest: /opt/warpnet/application.py
+        owner: warpnet
+        group: warpnet
+        mode: "0755"
+
+    - name: Install systemd service
+      ansible.builtin.template:
+        src: templates/warpnet.service.j2
+        dest: /etc/systemd/system/warpnet.service
+        owner: root
+        group: root
+        mode: "0644"
+      notify: Restart Warpnet
+
+    - name: Enable and start Warpnet
+      ansible.builtin.systemd:
+        name: warpnet
+        enabled: true
+        state: started
+        daemon_reload: true
+
+  handlers:
+    - name: Restart Warpnet
+      ansible.builtin.systemd:
+        name: warpnet
+        state: restarted
+        daemon_reload: true
+

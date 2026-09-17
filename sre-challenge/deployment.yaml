@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: warpnet-service
+spec:
+  selector:
+    app: warpnet
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warpnet
+spec:
+  selector:
+    matchLabels:
+      app: warpnet
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: warpnet
+    spec:
+      containers:
+      - name: warpnet
+        image: warpnet:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+

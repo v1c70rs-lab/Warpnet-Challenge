@@ -1,0 +1,14 @@
+[Unit]
+Description=Warpnet application
+After=network.target
+
+[Service]
+User=warpnet
+Group=warpnet
+WorkingDirectory=/opt/warpnet
+ExecStart=/opt/warpnet/.venv/bin/python /opt/warpnet/application.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
