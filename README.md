@@ -6,7 +6,7 @@ I had no prior experience with some of the technologies used in this challenge, 
 
 ## Changes to the original Python program
 
-I made the following changes to the original Python application.
+The following changes did I made to the original Python application.
 
 1. **Password logging**
    - Removed password values from application logs.
