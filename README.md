@@ -21,7 +21,7 @@ I made the following changes to the original Python application.
 
 I did not have enough time to further improve the SQLite database queries. The current implementation still queries the database more broadly than necessary.
 
-I also added an additional health endpoint to allow the Kubernetes deployment to check whether the application is healthy.
+I also added a health endpoint to allow the Kubernetes deployment to check whether the application is healthy.
 
 ## Vagrant
 
