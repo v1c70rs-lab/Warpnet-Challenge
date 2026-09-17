@@ -15,6 +15,7 @@
         name:
           - python3
           - python3-pip
+          - python3-packaging
         state: present
 
     - name: Create application directory
@@ -27,8 +28,8 @@
 
     - name: Copy requirements
       ansible.builtin.copy:
-        src: ../requirements.txt
-        dest: /opt/warpnet/requirements.txt
+        src: ../sre-challenge/app/
+        dest: /opt/warpnet/
         owner: warpnet
         group: warpnet
         mode: "0644"
@@ -38,14 +39,17 @@
         requirements: /opt/warpnet/requirements.txt
         virtualenv: /opt/warpnet/.venv
         virtualenv_command: python3 -m venv
-      become_user: warpnet
 
-    - name: Copy application
-      ansible.builtin.copy:
-        src: ../application.py
-        dest: /opt/warpnet/application.py
+    - name: Set virtualenv ownership
+      ansible.builtin.file:
+        path: /opt/warpnet/.venv
         owner: warpnet
         group: warpnet
+        recurse: true
+
+    - name: Change permissions application
+      ansible.builtin.file:
+        path: /opt/warpnet/application.py
         mode: "0755"
 
     - name: Install systemd service

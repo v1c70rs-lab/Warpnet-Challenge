@@ -6,6 +6,7 @@ After=network.target
 User=warpnet
 Group=warpnet
 WorkingDirectory=/opt/warpnet
+Environment="SECRET_KEY={{ SECRET_KEY }}"
 ExecStart=/opt/warpnet/.venv/bin/python /opt/warpnet/application.py
 Restart=on-failure
 
