@@ -4,7 +4,7 @@
 
 I had no prior experience with some of the technologies used in this challenge, such as Kubernetes (kind). Vagrant and Docker were not completely new to me, although I had limited practical experience with them.
 
-## Changes to the original challenge
+## Changes to the original Python program
 
 I made the following changes to the original Python application.
 
