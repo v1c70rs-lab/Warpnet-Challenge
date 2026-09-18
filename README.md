@@ -19,19 +19,11 @@ The following changes did I made to the original Python application.
    - Passwords were previously stored and compared in plaintext.
    - Passwords are now hashed using Werkzeug's password hashing functionality.
 
-HTTPS *****
+The Flask server also makes use of a self-signed SSL certificate to encrypt traffic between the web browser and the web server. 
 
 I did not have enough time to further improve the SQLite database queries. The current implementation still queries the database more broadly than necessary.
 
 I also added a health endpoint to allow the Kubernetes deployment to check whether the application is healthy.
-
-## Docker & Kubernetes
-
-To run the application in a container I used Docker. For managing the container I used kind (Kubernetes in Docker)
-
-I chose to run one container containing the application to keep it simple. That means that the database also runs in the same container.
-
-First I made a docker image that I could import into a kind cluster.
 
 ## Vagrant
 
@@ -44,7 +36,21 @@ A systemd unit file is created to start the application automatically.
 
 The application runs under a dedicated `warpnet` user rather than root.
 
+## Docker & Kubernetes
+
+To run the application in a container I used Docker. For managing the container I used kind (Kubernetes in Docker)
+
+I chose to run one container containing the application to keep it simple. That means that the database also runs in the same container.
+
+I also used a dedicated `warpnet` user rather than root inside the container.
+
 ## Installation - Vagrant machine
+
+Create inside the `/app` directory a new ssl certificate with:
+
+```bash
+openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+```
 
 Go to the `vagrant` directory and execute:
 
@@ -52,13 +58,19 @@ Go to the `vagrant` directory and execute:
 vagrant up
 ```
 
-Get the IP of the Vagrant machine add `:5000` to it and search it up. Example: `http://192.168.121.15:5000`
+Get the IP of the Vagrant machine, add `:5000` to it and search it up. Example: `http://192.168.121.15:5000`
 
 ## Installation - Docker & Kubernetes
 
 Install `docker`, `kind` and `kubectl` on your host.
 
 Make sure your user is member of the `docker group`.
+
+If you haven't already, create inside the `/app` directory a new ssl certificate with:
+
+```bash
+openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+```
 
 Allow the `deploy.sh` file to be executable:
 
