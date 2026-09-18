@@ -4,7 +4,7 @@
 
 I had no prior experience with some of the technologies used in this challenge, such as Kubernetes (kind). Vagrant and Docker were not completely new to me, although I had limited practical experience with them.
 
-## Changes to the original Python program
+## Changes to the original challenge
 
 The following changes did I made to the original Python application.
 
@@ -54,7 +54,7 @@ vagrant up
 
 Get the IP of the Vagrant machine add `:5000` to it and search it up. Example: `http://192.168.121.15:5000`
 
-## Installation Docker & Kubernetes
+## Installation - Docker & Kubernetes
 
 Install `docker`, `kind` and `kubectl` on your host.
 
