@@ -56,8 +56,18 @@ Get the IP of the Vagrant machine add `:5000` to it and search it up. Example: `
 
 ## Installation Docker & Kubernetes
 
-Install `Docker` and `kind` on your host.
+Install `docker`, `kind` and `kubectl` on your host.
 
 Make sure your user is member of the `docker group`.
 
-warpnet image
+Allow the `deploy.sh` file to be executable:
+
+```bash
+chmod +x deploy.sh
+```
+
+Execute the following script:
+
+```bash
+./deploy.sh
+```
