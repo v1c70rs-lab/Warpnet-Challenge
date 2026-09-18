@@ -83,3 +83,5 @@ Execute the following script:
 ```bash
 ./deploy.sh
 ```
+
+When the script is done running go to: `127.0.0.1:1111`
