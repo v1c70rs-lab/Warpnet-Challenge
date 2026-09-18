@@ -43,7 +43,6 @@ def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    # print(generate_password_hash("supersecret"))
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -63,5 +62,5 @@ def health():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, ssl_context=('cert.pem', 'key.pem'))
 
