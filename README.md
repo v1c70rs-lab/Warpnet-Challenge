@@ -21,7 +21,7 @@ The following changes did I made to the original Python application.
 
 I did not have enough time to further improve the SQLite database queries. The current implementation still queries the database more broadly than necessary.
 
-I am also aware of the unencrypted network traffic. I got HTTPS working properly on the Vagrant machine, but I could not get it working properly in the container. So I left it out completely, because the Docker image is shared between the container and the Vagrant machine.
+I am also aware of the unencrypted network traffic. I got HTTPS working properly on the Vagrant machine, but I could not get it working properly in the container. So I left it out completely, because the python script is shared between the container and the Vagrant machine.
 
 I also added a health endpoint to allow the Kubernetes deployment to check whether the application is healthy.
 
