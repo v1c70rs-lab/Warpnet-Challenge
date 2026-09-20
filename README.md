@@ -66,7 +66,11 @@ Allow the `deploy.sh` file to be executable:
 chmod +x deploy.sh
 ```
 
-Execute `deploy.sh`:
+Execute `deploy.sh` by going into the `sre-challenge directory`:
+
+```bash
+cd sre-challenge/
+```
 
 ```bash
 ./deploy.sh
