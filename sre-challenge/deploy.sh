@@ -1,15 +1,18 @@
 #!/bin/bash
 set -e
 
-IMAGE="warpnet_image"
+IMAGE="warpnet:latest"
 CLUSTER="warpnet-cluster"
 PORT="1111"
 
 echo "Creating kind cluster..."
 kind create cluster --name $CLUSTER
 
+echo "Creating docker image..."
+docker build -t $IMAGE ./app
+
 echo "Loading image into kind..."
-kind load image-archive $IMAGE --name $CLUSTER
+kind load docker-image $IMAGE --name $CLUSTER
 
 echo "Applying Kubernetes manifests..."
 kubectl apply -f ./deployment.yaml

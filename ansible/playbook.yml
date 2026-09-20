@@ -26,7 +26,7 @@
         group: warpnet
         mode: "0755"
 
-    - name: Copy requirements
+    - name: Copy content from /app to /opt/warpnet/
       ansible.builtin.copy:
         src: ../sre-challenge/app/
         dest: /opt/warpnet/
