@@ -46,6 +46,8 @@ I also used a dedicated `warpnet` user rather than root inside the container.
 
 ## Installation - Vagrant machine
 
+Install `vagrant` on your host.
+
 Go to the `vagrant` directory and execute:
 
 ```bash
@@ -76,4 +78,4 @@ cd sre-challenge/
 ./deploy.sh
 ```
 
-When the script is done running go to `127.0.0.1:1111` in your webbrowser.
+When the script is done running go to `http://127.0.0.1:1111` in your webbrowser.
